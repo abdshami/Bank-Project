@@ -341,7 +341,31 @@ router.put('/transfer/:id1/:id2', (req,res,next)=>{
 
 ////////////////////////////////////////////////////////////////////
 
+router.get('/cash/:cash', (req,res,next)=>{
+    try{
+     
+        let cash = parseInt(req.params.cash)
+        const clients = loadClients()
 
+        const clientToGet = clients.filter( (client)=>{
+              return client.cash === cash
+        })
+    
+        if (clientToGet){
+           
+           res.json(clientToGet)
+           console.log( chalk.bold.green.inverse("Wanted clients was readed successfully"))
+         }else{
+            console.log(chalk.bold.red.inverse("There no match "))
+    
+         }
+      
+    }catch(error){
+        next(error)
+    }     
+})
+
+/////////////////////////////////////////////////////////////////////////////////
 
 
 
